@@ -34,6 +34,11 @@ Use install.sh to both install and uninstall.
 
 ## To-Do List
 
+### Priority
+* Change name as OS X naming no longer is relevant
+* Add support for latest versions of OS
+
+
 ### Bug Fixes / Optimization
 * Look into $terminalText bug. Maybe find a better way of displaying colors then current method
 * Code cleanup
