@@ -1,11 +1,11 @@
 #!/bin/bash
-#Script for installing/uninstalling OSXey
+#Script for installing/uninstalling macInfo
 
 #List of options
 echo ""
 echo "Please choose an option:"
-echo "1. Install OSXey to /usr/local/bin"
-echo "2. Uninstall OSXey from /usr/local/bin"
+echo "1. Install macInfo to /usr/local/bin"
+echo "2. Uninstall macInfo from /usr/local/bin"
 echo -n "Option: "
 read answer
 echo ""
@@ -22,9 +22,9 @@ then
    fi
 
    #copy script
-   sudo cp OSXey Models.txt /usr/local/bin/
-   sudo chmod +x /usr/local/bin/OSXey
-   
+   sudo cp macInfo Models.txt /usr/local/bin/
+   sudo chmod +x /usr/local/bin/macInfo
+
    #display message
    tput setaf 2
    echo "Installed Sucessfully"
@@ -33,14 +33,14 @@ then
 elif [ $answer == 2 ]
 then
 
-   #remove script  
-   sudo rm -f /usr/local/bin/OSXey /usr/local/bin/Models.txt
+   #remove script
+   sudo rm -f /usr/local/bin/macInfo /usr/local/bin/Models.txt
 
    #display message
    tput setaf 2
    echo "Uninstalled Sucessfully"
    tput sgr0
-   
+
 else
    echo "Command not supported."
    exit
