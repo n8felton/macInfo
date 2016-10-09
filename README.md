@@ -1,11 +1,11 @@
-# OSXey
+# macInfo
 
 Repo is being maintained regally again.
 
-A script for OS X to display system information.
+A script for macOS / OS X to display system information.
 
-!['Screenshot'](https://raw.github.com/Gary00/OSXey/master/screenshot_normal.png)
-!['Screenshot'](https://raw.github.com/Gary00/OSXey/master/screenshot_color.png)
+!['Screenshot'](https://raw.github.com/Gary00/macInfo/master/screenshot_normal.png)
+!['Screenshot'](https://raw.github.com/Gary00/macInfo/master/screenshot_color.png)
 
 ## Auto Install / Uninstall
 Use install.sh to both install and uninstall.
