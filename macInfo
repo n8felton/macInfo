@@ -62,7 +62,7 @@ done
 user=$(whoami)
 
 # ==HOSTNAME==
-hostname=$(HOSTNAME | sed 's/.local//g')
+hostname=$(HOSTNAME | sed 's/.local//g' | sed 's/.gateway//g' )
 # if hostname is >35 characters, truncates to make it fit on std. 80 window
 if [ ${#HOSTNAME} -gt 35 ]
 then
