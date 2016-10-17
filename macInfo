@@ -103,10 +103,18 @@ fi
 
 # ==VERSION==
 versionNumber=$(sw_vers -productVersion) # Finds version number
+versionConvention="OS X"
 
 [[ $versionNumber =~ ^[0-9]+\.[0-9]+ ]] && versionShort="${BASH_REMATCH[0]}" # Get first 2 portions of semver
 
 case $versionShort in
+	10.12)
+		versionString="Sierra"
+		versionConvention="macOS"
+		;;
+	10.11)
+		versionString="El Capitan"
+		;;
 	10.10)
 		versionString="Yosemite"
 		;;
@@ -142,19 +150,19 @@ case $versionShort in
 		;;
 esac
 
-version="OS X $versionNumber $versionString"
+version="$versionConvention $versionString $versionNumber"
 
 # ==UPTIME==
 if [ "$(uptime | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{print $6}')" = "users" ]
-    then 
+    then
         # 1 hour < uptime < 1 day
         uptime="$(uptime | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{$4=substr($4,1,length($4)-1); print $3 " hours and " $4 " minutes"}')"
     else
         if [ "$(uptime | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{print $5}')" = "min," ]
-            then 
+            then
                 # uptime < 1 hour
                 uptime="$(uptime | sed -e "s/:/ /2" | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{print $4 " minutes"}')"
-            else 
+            else
             # uptime > 1 day
             uptime="$(uptime | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{print $3 " days, " $5 " hours and " $6 " minutes"}')"
         fi
