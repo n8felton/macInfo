@@ -180,11 +180,13 @@ terminal="$TERM"
 if [ -e /usr/local/bin/brew ]
 then
 	brewpackages=$(brew list -l | tail -n +2 | wc -l | tr -d ' ')
-	packagehandler=$brewpackages
+	packageHandlerNumber=$brewpackages
+	packageHandlerName="Homebrew"
 elif [ -f /opt/local/bin/port ] #don't think this is the right directory, need to check later.
 then
 	macportpackages="`port installed | wc -l | awk '{print $1 }'`"
-	packagehandler=$macportpackages
+	packageHandlerNumber=$macportpackages
+	packageHandlerName="Mac Ports"
 else
     packagehandler=0
 fi
@@ -230,7 +232,7 @@ ${GR}                ;#'               $versionText $version
 ${GR}       ,#####;,   ,;#####;,       $uptimeText $uptime
 ${GR}     ######################'      $shellText $shell
 ${YE}    #####################'        $terminalText $terminal
-${YE}    #####################         $packagehandlerText $packagehandler
+${YE}    #####################         $packagehandlerText $packageHandlerNumber ($packageHandlerName)
 ${LR}    #####################         $cpuText $cpu
 ${RE}    ######################,       $memoryText $mem
 ${RE}     #######################      $graphicsText $graphicsnoBrand
