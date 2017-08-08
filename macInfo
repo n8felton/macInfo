@@ -94,12 +94,12 @@ resolution=$(system_profiler SPDisplaysDataType | grep Resolution | cut -d':' -f
 # > graphicsnoBrand: HD Graphics/GeForce GT 330M
 
 # ==IP ADDRESS==
+# Find an active network interface
+interface=$(route get 0.0.0.0 2>/dev/null | awk '/interface: / {print $2}')
 
-## en1 or en0 should contain the ip address
-ipAddress=`ipconfig getifaddr en1`
-if [ -z "$ipAddress" ]; then
-    ipAddress=`ipconfig getifaddr en0`
-fi
+# Obtain the computer's IP address.
+ip_address=$(ipconfig getifaddr ${interface})
+
 
 # ==VERSION==
 versionNumber=$(sw_vers -productVersion) # Finds version number
@@ -238,6 +238,6 @@ ${RE}    ######################,       $memoryText $mem
 ${RE}     #######################      $graphicsText $graphicsnoBrand
 ${PU}      ####################'       $resolutionText $resolution
 ${BL}        #################'        $diskText $dused / $dcapacity, $dpercent
-${BL}         '####''''####'           $ipText $ipAddress
+${BL}         '####''''####'           $ipText $ip_address
                                        ${normal}
 "
