@@ -197,8 +197,8 @@ cpu=$(sysctl -n machdep.cpu.brand_string)
 cpu=$(echo "$cpu" | awk '$1=$1' | sed 's/([A-Z]\{1,2\})//g')
 
 # ==MEMORY==
-mem=$(sysctl -n hw.memsize)
-mem="$((mem/1073741274)) GB"
+hwmemsize=$(sysctl -n hw.memsize)
+hwmemsize="$((hwmemsize / 2**30)) GB"
 
 # ==DISK==
 disk=`df -Hl | head -2 | tail -1`
@@ -234,7 +234,7 @@ ${GR}     ######################'      $shellText $shell
 ${YE}    #####################'        $terminalText $terminal
 ${YE}    #####################         $packagehandlerText $packageHandlerNumber ($packageHandlerName)
 ${LR}    #####################         $cpuText $cpu
-${RE}    ######################,       $memoryText $mem
+${RE}    ######################,       $memoryText $hwmemsize
 ${RE}     #######################      $graphicsText $graphicsnoBrand
 ${PU}      ####################'       $resolutionText $resolution
 ${BL}        #################'        $diskText $dused / $dcapacity, $dpercent
