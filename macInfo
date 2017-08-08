@@ -70,7 +70,7 @@ then
 fi
 
 # ==MODEL==
-model=$(system_profiler SPHardwareDataType | awk '/Model Identifier/ { print $3 }')
+model=$(sysctl -n hw.model)
 # use grep to find the model in the list, then delete from ) to end of line
 modelname=`grep $model $DIR/Models.txt | sed -e 's/).*/)/g'`
 
