@@ -102,55 +102,13 @@ ip_address=$(ipconfig getifaddr ${interface})
 
 
 # ==VERSION==
-versionNumber=$(sw_vers -productVersion) # Finds version number
-versionConvention="OS X"
+product_version=$(sw_vers -productVersion)
+product_build=$(sw_vers -buildVersion)
 
-[[ $versionNumber =~ ^[0-9]+\.[0-9]+ ]] && versionShort="${BASH_REMATCH[0]}" # Get first 2 portions of semver
+os_marketing_name=$(curl -s "http://support-sp.apple.com/sp/product?edid=$(sw_vers -productVersion)&lang=en-US_US" |\
+	xmllint --xpath '//configCode/text()' -)
 
-case $versionShort in
-	10.12)
-		versionString="Sierra"
-		versionConvention="macOS"
-		;;
-	10.11)
-		versionString="El Capitan"
-		;;
-	10.10)
-		versionString="Yosemite"
-		;;
-	10.9)
-		versionString="Mavericks"
-		;;
-	10.8)
-		versionString="Mountian Lion"
-		;;
-	10.7)
-		versionString="Lion"
-		;;
-	10.6)
-		versionString="Snow Leopard"
-		;;
-	10.5)
-		versionString="Leopard"
-		;;
-	10.4)
-		versionString="Tiger"
-		;;
-	10.3)
-		versionString="Panther"
-		;;
-	10.2)
-		versionString="Jaguar"
-		;;
-	10.1)
-		versionString="Puma"
-		;;
-	10.0)
-		versionString="Cheetah"
-		;;
-esac
-
-version="$versionConvention $versionString $versionNumber"
+version="$os_marketing_name $product_version ($product_build)"
 
 # ==UPTIME==
 if [ "$(uptime | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{print $6}')" = "users" ]
