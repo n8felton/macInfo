@@ -70,9 +70,16 @@ then
 fi
 
 # ==MODEL==
+serial_number=$(ioreg -c IOPlatformExpertDevice -d 2 | awk -F\" '/IOPlatformSerialNumber/{print $(NF-1)}')
+
+if [[ $serial_number =~ ^VM ]]; then
+	modelname="Virtual Machine"
+else
+	modelname=$( curl -s http://support-sp.apple.com/sp/product?cc=$( ioreg -c IOPlatformExpertDevice -d 2 | awk -F\" '/IOPlatformSerialNumber/{ sn=$(NF-1); if (length(sn) == 12) count=3; else if (length(sn) == 11) count=2; print substr(sn, length(sn) - count, length(sn))}' ) | xmllint --xpath '//configCode/text()' - )
+fi
+
 model=$(sysctl -n hw.model)
-# use grep to find the model in the list, then delete from ) to end of line
-modelname=`grep $model $DIR/Models.txt | sed -e 's/).*/)/g'`
+modelname="$modelname ($model)"
 
 # ==GRAPHICS==
 graphics=$(system_profiler SPDisplaysDataType |
