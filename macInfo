@@ -19,13 +19,12 @@ do
 	case "$1" in
 
     -c|--color)
-			GR='\033[00;32m'
-			YE='\033[00;33m'
-			LR='\033[01;31m'
-			RE='\033[00;31m'
-			PU='\033[00;35m'
-			CY='\033[00;36m'
-			BL='\033[00;34m'
+			GR='\033[38;5;70m'
+			YE='\033[38;5;220m'
+			OR='\033[38;5;172m'
+			RE='\033[38;5;160m'
+			PU='\033[38;5;89m'
+			BL='\033[38;5;32m'
     	    shift
             ;;
 	-red)
@@ -185,14 +184,16 @@ ${GR}                  ,##;            $hostnameText $hostname
 ${GR}                 ####             $modelText $modelname
 ${GR}                ;#'               $versionText $version
 ${GR}       ,#####;,   ,;#####;,       $uptimeText $uptime
-${GR}     ######################'      $shellText $shell
-${YE}    #####################'        $terminalText $terminal
-${YE}    #####################         $packagehandlerText $packageHandlerNumber ($packageHandlerName)
-${LR}    #####################         $cpuText $cpu
-${RE}    ######################,       $memoryText $hwmemsize
-${RE}     #######################      $graphicsText $graphicsnoBrand
-${PU}      ####################'       $resolutionText $resolution
-${BL}        #################'        $diskText $dused / $dcapacity, $dpercent
-${BL}         '####''''####'           $ipText $ip_address
-                                       ${normal}
+${GR}     ,#####################'      $shellText $shell
+${YE}    ,####################'        $terminalText $terminal
+${YE}    ####################'         $cpuText $cpu
+${OR}    ####################          $memoryText $hwmemsize
+${OR}    #####################         
+${RE}    '#####################,       
+${RE}     #######################      
+${PU}      #####################'      
+${PU}       ###################'       $diskText $dused / $dcapacity, $dpercent
+${BL}        #################'        $ipText $ip_address
+${BL}         '####''''####'           ${normal}
+                                       
 "
