@@ -118,20 +118,10 @@ os_marketing_name=$(curl -s "http://support-sp.apple.com/sp/product?edid=$(sw_ve
 version="$os_marketing_name $product_version ($product_build)"
 
 # ==UPTIME==
-if [ "$(uptime | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{print $6}')" = "users" ]
-    then
-        # 1 hour < uptime < 1 day
-        uptime="$(uptime | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{$4=substr($4,1,length($4)-1); print $3 " hours and " $4 " minutes"}')"
-    else
-        if [ "$(uptime | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{print $5}')" = "min," ]
-            then
-                # uptime < 1 hour
-                uptime="$(uptime | sed -e "s/:/ /2" | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{print $4 " minutes"}')"
-            else
-            # uptime > 1 day
-            uptime="$(uptime | sed -e "s/:/ /2" | sed -e "s/,/ /2" | awk '{print $3 " days, " $5 " hours and " $6 " minutes"}')"
-        fi
-fi
+boottime=$(sysctl -n kern.boottime | awk '{print $4}' | sed 's/,//')
+currenttime=$(date +%s)
+uptime=$(expr $currenttime - $boottime)
+uptime=$(printf '%d days %dh:%dm:%ds\n' $(($uptime/86400)) $(($uptime%86400/3600)) $(($uptime%3600/60)) $(($uptime%60)))
 
 # ==SHELL==
 shell="$SHELL"
