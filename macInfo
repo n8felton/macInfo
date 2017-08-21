@@ -124,11 +124,11 @@ hwmemsize=$(sysctl -n hw.memsize)
 hwmemsize="$((hwmemsize / 2**30)) GB"
 
 # ==DISK==
-disk=`df -Hl | head -2 | tail -1`
-dpercent=`echo $disk | awk '{print $5}'`
-dfree=`echo $disk | awk '{print $4}'`
-dused=`echo $disk | awk '{print $3}'`
-dcapacity=`echo $disk | awk '{print $2}'`
+disk=$(df -hl / | sed -e 1d)
+dpercent=$(awk '{print $5}' <<< $disk)
+dfree=$(awk '{print $4}' <<< $disk)
+dused=$(awk '{print $3}' <<< $disk)
+dcapacity=$(awk '{print $2}' <<< $disk)
 
 
 userText="${textColor}User:${normal}"
