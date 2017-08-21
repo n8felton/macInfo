@@ -114,9 +114,6 @@ uptime=$(printf '%d days %dh:%dm:%ds\n' $(($uptime/86400)) $(($uptime%86400/3600
 # ==SHELL==
 shell="$SHELL"
 
-# ==TERMINAL==
-terminal="$TERM"
-
 # ==CPU==
 cpu=$(sysctl -n machdep.cpu.brand_string)
 # removes (R) and (TM) from the CPU name so it fits in a standard 80 window
