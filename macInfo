@@ -81,23 +81,12 @@ model=$(sysctl -n hw.model)
 modelname="$modelname ($model)"
 
 # ==GRAPHICS==
-graphics=$(system_profiler SPDisplaysDataType |
-awk '/Model/{for (i=1; i<=NF-2; i++) $i = $(i+2); NF-=2; print}' | paste -sd "/" -)
-
-graphicsnoBrand=$(system_profiler SPDisplaysDataType |
-awk '/Model/{for (i=1; i<=NF-3; i++) $i = $(i+3); NF-=3; print}' | paste -sd "/" -)
-
-resolution=$(system_profiler SPDisplaysDataType | grep Resolution | cut -d':' -f2 | sed -e 's/^[ \t]*//' | awk '$1=$1' ORS=' ')
-
-# Use system_profiler to find graphics cards, then awk to find 'Model'
-# Output of this step is lines such as this:
-# > Chipset Model: Intel HD Graphics
-# > Chipset Model: NVIDIA GeForce GT 330M
-# Use awk with a loop to print the arguments after Model: to end of line
-# Use paste to join multiple lines together with a slash if necessary.
-# Sample output:
-# > graphics:        Intel HD Graphics/NVIDIA GeForce GT 330M
-# > graphicsnoBrand: HD Graphics/GeForce GT 330M
+# Small optimization to make the script a touch faster via ev0rtex
+# https://github.com/ev0rtex/macInfo/blob/abd4c19741098d5ae6f2f451cc96bbf49784c168/macInfo
+graphicsData=$(system_profiler SPDisplaysDataType)
+graphics=$(awk -F': ' '/Model/{print $NF}' <<< "$graphicsData" | paste -sd "/" -)
+graphics_memory=$(awk -F': ' '/VRAM/{print $NF}' <<< "$graphicsData")
+graphics="$graphics $graphics_memory"
 
 # ==IP ADDRESS==
 # Find an active network interface
