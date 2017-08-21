@@ -147,21 +147,21 @@ ipText="${textColor}IP:${normal}"
 
 echo -e "
 
-${GR}                     ,            $userText $user
-${GR}                  ,##;            $hostnameText $hostname
-${GR}                 ####             $modelText $modelname
-${GR}                ;#'               $versionText $version
-${GR}       ,#####;,   ,;#####;,       $uptimeText $uptime
-${GR}     ,#####################'      $shellText $shell
-${YE}    ,####################'        $terminalText $terminal
-${YE}    ####################'         $cpuText $cpu
-${OR}    ####################          $memoryText $hwmemsize
-${OR}    #####################         
-${RE}    '#####################,       
-${RE}     #######################      
-${PU}      #####################'      
-${PU}       ###################'       $diskText $dused / $dcapacity, $dpercent
-${BL}        #################'        $ipText $ip_address
-${BL}         '####''''####'           ${normal}
+${GR}                     ,            
+${GR}                  ,##;            
+${GR}                 ####             
+${GR}                ;#'               $userText $user
+${GR}       ,#####;,   ,;#####;,       $hostnameText $hostname
+${GR}     ,#####################'      $modelText $modelname
+${YE}    ,####################'        $versionText $version
+${YE}    ####################'         $uptimeText $uptime
+${OR}    ####################          $shellText $shell
+${OR}    #####################         $cpuText $cpu
+${RE}    '#####################,       $memoryText $hwmemsize
+${RE}     #######################      $graphicsText $graphics
+${PU}      #####################'      $diskText $dused / $dcapacity, $dpercent used
+${PU}       ###################'       $ipText $ip_address
+${BL}        #################'        ${normal}
+${BL}         '####''''####'           
                                        
 "
