@@ -161,7 +161,7 @@ ${RE}    '#####################,       $memoryText $hwmemsize
 ${RE}     #######################      $graphicsText $graphics
 ${PU}      #####################'      $diskText $dused / $dcapacity, $dpercent used
 ${PU}       ###################'       $ipText $ip_address
-${BL}        #################'        ${normal}
+${BL}        #################'        
 ${BL}         '####''''####'           
-                                       
+                                       ${normal}
 "
